@@ -15,8 +15,6 @@ This is a tried and tested cross platform fixed point maths library.
 
 This library implements the math.h functions in fixed point (Q15.16) format, a subset of the currently supported functions are: * sin, cos, tan * asin, acos, atan, atan2 * sqrt, exp * mul, div * sadd, ssub, smul, sdiv (saturated arithmetic)
 
-## Function Reference
-
 ### Conversion Functions
 
 Conversion from integers and floating point values. These conversions retain the numeric value and perform rounding where necessary.
@@ -28,6 +26,28 @@ Conversion from integers and floating point values. These conversions retain the
 * fix16_to_dbl(a) Divides by fix16_one. All fix16_t values fit into a double, so no rounding happens.
 * fix16_from_str(buf) Converts from string to fix16_t.
 * fix16_to_str(value, buf, decimals) Converts from fix16_t to string.
+
+### Typedefs
+
+* fix16_t: typedef int32_t fix16_t
+
+### Macros
+F16C(i,m) Creates a fixed point constant for the value i.m value
+
+## Constants
+The following constants are available
+
+* FOUR_DIV_PI 4/pi
+* FOUR_DIV_PI2 -4/pi
+* X4_CORRECTION_COMPONENT 0.225
+* PI_DIV_4 pi/4
+* THREE_PI_DIV_4 (3*pi)/4
+* fix16_maximum
+* fix16_minimum
+* fix16_overflow
+* fix16_pi
+* fix16_e
+* fix16_one
 
 ### Basic arithmetic
 These functions perform rounding and detect overflows, unless disabled with CompilationOptions. When overflow is detected, they return fix16_overflow as a marker value.
@@ -45,6 +65,13 @@ These functions perform rounding and detect overflows, unless disabled with Comp
 * fix16_div(a,b) Division.
     * Implementation 1: using uint32_t / uint32_t
     * Implementation 2: performing division manually with uint32_t
+* fix16_abs(a) absolute value
+* fix16_floor(a) recover integer portion, truncate fraction
+* fix16_ceil(a) recover integer portion, round fraction
+* fix16_min(a,b) return the lesser of a,b
+* fix16_max(a,b) return the greater of a,b
+* fix16_max(a,b,c) return a or a the minimum of a and b or the maximum of a and c
+
 ### Saturating aritmetic
 Functions for basic arithmetic that saturate instead of overflowing. They are based around the functions listed above, but add extra logic to convert fix16_overflow to either fix16_min or fix16_max.
 
@@ -59,6 +86,8 @@ Roots, exponents & similar.
 * fix16_sqrt(a) Square root. Performs rounding and is accurate to Fix16Limits.
 * fix16_exp(a) Exponential function using power series approximation. Accuracy depends on range, worst case +-40 absolute for negative inputs and +-0.003% for positive inputs. Average error is +-1 for neg and +-0.0003% for pos.
 * fix16_log(a) Natural logarithm using Newton approximation and fix16_exp(). Worst case error +-3 absolute, average error less than 1 unit.
+* fix16_log2(a) Return the log base 2 of a
+* fix16_slog2(a) Return the saturated base 2 log of a
 
 ### Trigonametric functions
 Functions for sin, tan etc.
@@ -67,7 +96,11 @@ Functions for sin, tan etc.
 * fix16_sin_parabola(a) Alternative sine implementation.
 * fix16_cos(a) Cosine for angle in radians
 * fix16_tan(a) Tangent for angle in radians
+* fix16_deg_to_rad(a) Angle in radians from angle in degrees
 * fix16_asin(a) Inverse of sine, output in radians
 * fix16_acos(a) Inverse of cosine, output in radians
 * fix16_atan(a) Inverse of tangent, output in radians
 * fix16_atan2(a,b) Inverse of tangent with automatic sign handling. Output in radians.
+
+### String functions
+fix16_to_str(a,b,d) Converts fixed point value a to a string placed in b with c digits
