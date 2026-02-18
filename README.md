@@ -13,4 +13,4 @@ Cross Platform Fixed Point Maths Library
 
 This is a tried and tested cross platform fixed point maths library.
 
-This library implements the math.h functions in fixed point (16.16) format, a subset of the currently supported functions are: * sin, cos, tan * asin, acos, atan, atan2 * sqrt, exp * mul, div * sadd, ssub, smul, sdiv (saturated arithmetic)
+This library implements the math.h functions in fixed point (Q15.16) format, a subset of the currently supported functions are: * sin, cos, tan * asin, acos, atan, atan2 * sqrt, exp * mul, div * sadd, ssub, smul, sdiv (saturated arithmetic)
